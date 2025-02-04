@@ -1,92 +1,73 @@
 body {
-    font-family: 'Pokemon Solid', sans-serif; /* Use the Pokémon font */
-    background-color: #f0f0f0; /* Light gray background */
+    font-family: 'Pokemon Solid', sans-serif;
+    background-color: #000; /* Black background */
     margin: 0;
-    color: #333; /* Dark gray text color */
+    color: #fff; /* White text */
 }
 
-header {
-    background-color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-header img {
-    max-width: 200px;
-}
+/* ... (rest of the CSS with modifications below) */
 
 .search-container {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around; /* Distribute elements evenly */
-}
-
-.search-container select,
-.search-container input,
-.search-container button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#pokemon-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-    grid-gap: 20px;
-    padding: 20px;
+    background-color: #333; /* Darker search background */
+    /* ... */
 }
 
 .pokemon-card {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    text-align: center;
-}
-
-.pokemon-card img {
-    max-width: 150px;
-    margin-bottom: 10px;
-}
-
-.pokemon-card h2 {
-    margin-bottom: 5px;
+    background-color: #111; /* Darker card background */
+    border: 1px solid #333; /* Add a border */
+    /* ... */
 }
 
 .pokemon-card p {
-    color: #777;
-    font-size: 0.9em;
+    color: #aaa; /* Lighter text for details */
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    padding-bottom: 20px;
+/* Style the modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-.pagination button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff; /* Blue button */
-    color: #fff;
+.modal-content {
+    background-color: #222;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    color: white;
+    position: relative; /* For close button positioning */
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
     cursor: pointer;
+    color: white;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .search-container {
-        flex-direction: column; /* Stack elements vertically */
-        align-items: stretch; /* Stretch elements to full width */
-    }
-    .search-container select,
-    .search-container input,
-    .search-container button {
-        margin-bottom: 10px;
-    }
+#modal-content {
+    text-align: center;
+}
+
+#modal-content img {
+    max-width: 200px;
+    margin-bottom: 10px;
+}
+
+#modal-content h2 {
+    margin-bottom: 5px;
+}
+
+#modal-content p {
+    color: #ddd;
 }
