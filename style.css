@@ -6,22 +6,22 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure footer sticks to bottom */
+    min-height: 100vh;
 }
 
 header {
     display: flex;
-    justify-content: center; /* Center the logo */
+    justify-content: center;
     padding: 20px 0;
 }
 
 header img {
-    max-width: 300px; /* Adjust as needed */
+    max-width: 300px;
 }
 
 main {
     padding: 20px;
-    flex: 1; /* Allow main content to take up available space */
+    flex: 1;
 }
 
 .filter-controls {
@@ -32,15 +32,20 @@ main {
 
 #pokemon-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
 
 .pokemon-card {
-    background-color: #333; /* Darker card background */
+    background-color: #333;
     padding: 15px;
     border-radius: 8px;
     text-align: center;
+    transition: transform 0.2s; /* Add a transition for hover effect */
+}
+
+.pokemon-card:hover {
+    transform: scale(1.05); /* Scale up slightly on hover */
 }
 
 .pokemon-card img {
@@ -57,14 +62,25 @@ main {
     margin-bottom: 10px;
 }
 
-/* Add more type-specific styles as needed (e.g., .fire-type, .water-type) */
-.fire-type {
-    background-color: #FF4422;
-}
-.water-type {
-    background-color: #2288FF;
-}
-/* ...other types */
+/* Type colors */
+.fire-type { background-color: #FF4422; }
+.water-type { background-color: #2288FF; }
+.grass-type { background-color: #44AA44; }
+.bug-type { background-color: #AABB22; }
+.poison-type { background-color: #AA5588; }
+.electric-type { background-color: #FFFF00; color: black; }
+.ground-type { background-color: #D2B48C; }
+.rock-type { background-color: #B8860B; }
+.fighting-type { background-color: #C03028; }
+.psychic-type { background-color: #F85888; }
+.ghost-type { background-color: #705898; }
+.dark-type { background-color: #707070; }
+.steel-type { background-color: #B7B7CE; }
+.flying-type { background-color: #88BBFF; }
+.fairy-type { background-color: #EE99AC; }
+.ice-type { background-color: #96D9FF; }
+.dragon-type { background-color: #843CFF; }
+.normal-type { background-color: #AAAA99; }
 
 .pagination {
     display: flex;
