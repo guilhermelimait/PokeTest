@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = startIndex; i < endIndex; i++) {
             const pokemon = pokemonData[i];
             const details = await fetchPokemonData(pokemon.url || `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
-            if (details.length === 0) continue; // Skip if details fetch fails
+            if (details.length === 0) continue;
 
             const card = createPokemonCard(details[0] || details);
             pokemonGallery.appendChild(card);
@@ -101,3 +101,36 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredPokemon = allPokemonData;
             displayPokemon(filteredPokemon);
         });
+
+    typeFilter.addEventListener('change', () => {
+        const selectedType = typeFilter.value;
+        filteredPokemon = allPokemonData.filter(pokemon => {
+            if (!selectedType) return true;
+            return pokemon.types.some(type => type.type.name === selectedType);
+        });
+        currentPage = 1;
+        displayPokemon(filteredPokemon);
+    });
+
+    searchButton.addEventListener('click', () => {
+        const searchTerm = searchBox.value.toLowerCase();
+        filteredPokemon = allPokemonData.filter(pokemon =>
+            pokemon.name.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;
+        displayPokemon(filteredPokemon);
+    });
+
+    prevPageButton.addEventListener('click', () => {
+        currentPage--;
+        if (currentPage < 1) currentPage = 1;
+        displayPokemon(filteredPokemon);
+    });
+
+    nextPageButton.addEventListener('click', () => {
+        currentPage++;
+        const maxPages = Math.ceil(filteredPokemon.length / pokemonPerPage);
+        if (currentPage > maxPages) currentPage = maxPages;
+        displayPokemon(filteredPokemon);
+    });
+});
