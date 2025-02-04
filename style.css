@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    background: linear-gradient(to bottom, #333, #111); /* Gradient header */
+    background: linear-gradient(to bottom, #333, #111);
     padding: 20px;
     text-align: center;
 }
@@ -37,14 +37,34 @@ header img {
     padding: 20px;
 }
 
+.pokemon-card-container { /* New container for the card and background */
+    position: relative; /* Needed for absolute positioning of background */
+    border-radius: 10px; /* Rounded corners for the background */
+    overflow: hidden; /* Prevents background from overflowing rounded corners */
+}
+
+.pokemon-card-background { /* The grayish background behind the card */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(100, 100, 100, 0.3); /* Adjust opacity as needed */
+    border-radius: 10px;
+    z-index: -1; /* Place behind the card content */
+}
+
 .pokemon-card {
-    background: linear-gradient(to bottom, #222, #111); /* Gradient cards */
-    border: 1px solid #555; /* Darker border */
+    background: linear-gradient(to bottom, #222, #111);
+    border: 1px solid #555;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     text-align: center;
+    position: relative; /* Ensure card content is above the background */
+    z-index: 1; /* Ensure card content is above the background */
 }
+
 
 .pokemon-card img {
     max-width: 150px;
@@ -60,7 +80,7 @@ header img {
     font-size: 0.9em;
 }
 
-.type-icon { /* Style for type icons */
+.type-icon {
     width: 20px;
     height: 20px;
     margin-right: 5px;
@@ -85,69 +105,10 @@ header img {
 }
 
 /* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.modal-content {
-    background-color: #222;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    color: white;
-    position: relative;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 20px;
-    cursor: pointer;
-    color: white;
-}
-
-#modal-content {
-    text-align: center;
-}
-
-#modal-content img {
-    max-width: 200px;
-    margin-bottom: 10px;
-}
-
-#modal-content h2 {
-    margin-bottom: 5px;
-}
-
-#modal-content p {
-    color: #ddd;
-}
+.modal { /* ... */ }
+.modal-content { /* ... */ }
+.close-button { /* ... */ }
 
 /* Search Bar Styling */
-.search-container input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding-left: 30px; /* Space for the icon */
-    background-image: url("search_icon.png"); /* Replace with your icon path */
-    background-size: 20px;
-    background-position: 5px center;
-    background-repeat: no-repeat;
-}
-
-.search-container select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+.search-container input { /* ... */ }
+.search-container select { /* ... */ }
