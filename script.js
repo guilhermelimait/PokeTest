@@ -1,6 +1,28 @@
-// ... (previous code)
+const pokemonList = document.getElementById('pokemon-list');
+const typeFilter = document.getElementById('type-filter');
+const nameSearch = document.getElementById('name-search');
+const previousPageButton = document.getElementById('previous-page');
+const nextPageButton = document.getElementById('next-page');
 
-// Fetch Pokémon types for the filter
+let allPokemonData = [];
+let currentPage = 1;
+const pokemonPerPage = 9;
+
+async function fetchPokemonData() {
+    try {
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+        const data = await response.json();
+        const pokemonPromises = data.results.map(async (pokemon) => {
+            const pokemonDetailsResponse = await fetch(pokemon.url);
+            return await pokemonDetailsResponse.json();
+        });
+        allPokemonData = await Promise.all(pokemonPromises);
+        displayPokemon(currentPage);
+    } catch (error) {
+        console.error('Error fetching Pokémon data:', error);
+    }
+}
+
 async function fetchPokemonTypes() {
     const response = await fetch('https://pokeapi.co/api/v2/type');
     const data = await response.json();
@@ -14,6 +36,18 @@ async function fetchPokemonTypes() {
     });
 }
 
+function displayPokemon(page) {
+    const startIndex = (page - 1) * pokemonPerPage;
+    const endIndex = startIndex + pokemonPerPage;
+    const pokemonToDisplay = allPokemonData.slice(startIndex, endIndex);
+
+    pokemonList.innerHTML = '';
+
+    pokemonToDisplay.forEach(pokemon => {
+        const card = createPokemonCard(pokemon);
+        pokemonList.appendChild(card);
+    });
+}
 
 function createPokemonCard(pokemon) {
     const card = document.createElement('div');
@@ -54,7 +88,6 @@ async function showDetails(pokemonId) {
     }
 }
 
-// Close the modal when the close button is clicked
 const closeButton = document.querySelector('.close-button');
 const modal = document.getElementById('pokemon-details-modal');
 
@@ -62,7 +95,6 @@ closeButton.addEventListener('click', () => {
     modal.style.display = 'none';
 });
 
-// Close the modal if the user clicks outside of the modal content
 window.addEventListener('click', (event) => {
     if (event.target == modal) {
         modal.style.display = 'none';
@@ -91,13 +123,28 @@ typeFilter.addEventListener('change', () => {
 });
 
 function displayFilteredPokemon(filteredPokemon) {
-    pokemonList.innerHTML = ''; // Clear previous Pokémon
-
+    pokemonList.innerHTML = '';
     filteredPokemon.forEach(pokemon => {
         const card = createPokemonCard(pokemon);
         pokemonList.appendChild(card);
     });
 }
+
+previousPageButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        displayPokemon(currentPage);
+    }
+});
+
+nextPageButton.addEventListener('click', () => {
+    const totalPages = Math.ceil(allPokemonData.length / pokemonPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        displayPokemon(currentPage);
+    }
+});
+
 
 fetchPokemonTypes();
 fetchPokemonData();
