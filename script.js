@@ -43,3 +43,6 @@ function displayPokemon(page) {
     const pokemonToDisplay = allPokemonData.slice(startIndex, endIndex);
 
     pokemonList.innerHTML = '';
+
+    pokemonToDisplay.forEach(pokemon => {
+        const
