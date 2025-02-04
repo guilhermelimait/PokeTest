@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png" alt="Pokemon Logo">
+        <h1>Ivysaur</h1>
+        <p>Mais detalhes</p> 
+    </header>
+
+    <div class="search-container">
+        <p>Busque por tipo:</p>
+        <select id="type-filter">
+            <option value="">Todos</option>
+            <option value="grass">Grama</option>
+            <option value="poison">Veneno</option>
+            <option value="fire">Fogo</option>
+            <option value="water">Água</option>
+            </select>
+
+        <input type="text" id="name-search" placeholder="Encontre seu pokémon...">
+        <button>Q</button> 
+    </div>
+
+    <main id="pokemon-list">
+        </main>
+
+    <div class="pagination">
+       <button id="previous-page">Anterior</button>
+       <button id="next-page">Próxima</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
