@@ -1,73 +1,83 @@
 body {
     font-family: 'Pokemon Solid', sans-serif;
-    background-color: #000; /* Black background */
+    background-color: #000;
     margin: 0;
-    color: #fff; /* White text */
+    color: #fff;
 }
 
-/* ... (rest of the CSS with modifications below) */
-
-.search-container {
-    background-color: #333; /* Darker search background */
-    /* ... */
-}
-
-.pokemon-card {
-    background-color: #111; /* Darker card background */
-    border: 1px solid #333; /* Add a border */
-    /* ... */
-}
-
-.pokemon-card p {
-    color: #aaa; /* Lighter text for details */
-}
-
-/* Style the modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.modal-content {
-    background-color: #222;
-    margin: 15% auto;
+header {
+    background-color: #111; /* Darker header */
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    color: white;
-    position: relative; /* For close button positioning */
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 20px;
-    cursor: pointer;
-    color: white;
-}
-
-#modal-content {
     text-align: center;
 }
 
-#modal-content img {
+header img {
     max-width: 200px;
+}
+
+.search-container {
+    background-color: #333;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.search-container select,
+.search-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#pokemon-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Grid layout restored */
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.pokemon-card {
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.pokemon-card img {
+    max-width: 150px;
     margin-bottom: 10px;
 }
 
-#modal-content h2 {
+.pokemon-card h2 {
     margin-bottom: 5px;
 }
 
-#modal-content p {
-    color: #ddd;
+.pokemon-card p {
+    color: #aaa;
+    font-size: 0.9em;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Modal Styles (no changes needed) */
+.modal { /* ... */ }
+.modal-content { /* ... */ }
+.close-button { /* ... */ }
