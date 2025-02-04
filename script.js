@@ -43,16 +43,3 @@ function displayPokemon(page) {
     const pokemonToDisplay = allPokemonData.slice(startIndex, endIndex);
 
     pokemonList.innerHTML = '';
-
-    pokemonToDisplay.forEach(pokemon => {
-        const card = createPokemonCard(pokemon);
-        pokemonList.appendChild(card);
-    });
-}
-
-function createPokemonCard(pokemon) {
-    const cardContainer = document.createElement('div');
-    cardContainer.classList.add('pokemon-card-container');
-
-    const cardBackground = document.createElement('div');
-    cardBackground.classList.add
