@@ -50,16 +50,8 @@ function displayPokemon(page) {
 }
 
 function createPokemonCard(pokemon) {
-    const card = document.createElement('div');
-    card.classList.add('pokemon-card');
+    const cardContainer = document.createElement('div');
+    cardContainer.classList.add('pokemon-card-container');
 
-    let typesHTML = '';
-    pokemon.types.forEach(type => {
-        typesHTML += `<img class="type-icon" src="images/<span class="math-inline">\{type\.type\.name\}\.png" alt\="</span>{type.type.name} icon">`; // Update path
-    });
-
-    card.innerHTML = `
-        <img src="<span class="math-inline">\{pokemon\.sprites\.front\_default\}" alt\="</span>{pokemon.name}">
-        <h2><span class="math-inline">\{pokemon\.name\}</h2\>
-<p\>\#</span>{pokemon.id} | ${typesHTML}</p> 
-        <p>Height: ${pokemon.height / 10} m | Weight: ${pokemon.weight / 10
+    const cardBackground = document.createElement('div');
+    cardBackground.classList.add('pokemon-card-background
