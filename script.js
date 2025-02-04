@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let allPokemonData = [];
     let filteredPokemon = [];
     let currentPage = 1;
-    const pokemonPerPage = 10;
+    const pokemonPerPage = 9; // Updated to 9 for 3x3 grid
 
+    // Fetch Pokemon types for the filter
     fetch('https://pokeapi.co/api/v2/type')
         .then(response => response.json())
         .then(data => {
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+    // Fetch Pokemon data (Corrected)
     async function fetchPokemonData(url) {
         try {
             const response = await fetch(url);
@@ -29,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            return data;
+            return data.results || [data]; // Handle both list and single Pokemon responses
         } catch (error) {
             console.error("Error fetching Pokemon data:", error);
             pokemonGallery.innerHTML = "<p>Error loading Pokemon data. Please try again later.</p>";
@@ -37,17 +39,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Display Pokemon cards (Corrected)
     async function displayPokemon(pokemonData) {
-        pokemonGallery.innerHTML = '';
-        for (const pokemon of pokemonData) {  // Use a loop to fetch details sequentially
-            const pokemonDetails = await fetchPokemonData(pokemon.url);
-            if (pokemonDetails.length === 0) return; // Handle fetch error
-            const card = createPokemonCard(pokemonDetails);
+        pokemonGallery.innerHTML = ''; // Clear previous cards
+
+        if (!pokemonData || pokemonData.length === 0) {
+            pokemonGallery.innerHTML = "<p>No Pokemon found.</p>";
+            return;
+        }
+
+        const startIndex = (currentPage - 1) * pokemonPerPage;
+        const endIndex = Math.min(startIndex + pokemonPerPage, pokemonData.length); // Corrected end index
+
+        for (let i = startIndex; i < endIndex; i++) {
+            const pokemon = pokemonData[i];
+            const pokemonDetails = await fetchPokemonData(pokemon.url || `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`); // Corrected URL
+            if (pokemonDetails.length === 0) continue; // Skip if details fetch fails
+
+            const card = createPokemonCard(pokemonDetails[0] || pokemonDetails); // Access the first element if it's an array
             pokemonGallery.appendChild(card);
         }
     }
 
-
+    // Create Pokemon card (No changes needed)
     function createPokemonCard(pokemon) {
         const card = document.createElement('div');
         card.classList.add('pokemon-card');
@@ -81,15 +95,47 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     }
 
-    fetchPokemonData('https://pokeapi.co/api/v2/pokemon?limit=1000')  // Fetch a reasonable number
+    // Initial Pokemon fetch (Corrected)
+    fetchPokemonData('https://pokeapi.co/api/v2/pokemon?limit=1000')
         .then(data => {
-            if (data.length === 0) return; // Handle API fetch error
-            allPokemonData = data.results;
+            if (data.length === 0) return;
+            allPokemonData = data;
             filteredPokemon = allPokemonData;
-            displayPokemon(filteredPokemon.slice(0, pokemonPerPage));
+            displayPokemon(filteredPokemon); // Display all initially
         });
 
+    // Filter by type (Corrected)
     typeFilter.addEventListener('change', () => {
         const selectedType = typeFilter.value;
         filteredPokemon = allPokemonData.filter(pokemon => {
-            if (!selectedType) return true
+            if (!selectedType) return true;
+            return pokemon.types.some(type => type.type.name === selectedType);
+        });
+        currentPage = 1; // Reset page to 1 when filtering
+        displayPokemon(filteredPokemon);
+    });
+
+    // Search functionality (Corrected)
+    searchButton.addEventListener('click', () => {
+        const searchTerm = searchBox.value.toLowerCase();
+        filteredPokemon = allPokemonData.filter(pokemon =>
+            pokemon.name.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1; // Reset page to 1 when searching
+        displayPokemon(filteredPokemon);
+    });
+
+    // Pagination (Corrected)
+    prevPageButton.addEventListener('click', () => {
+        currentPage--;
+        if (currentPage < 1) currentPage = 1;
+        displayPokemon(filteredPokemon);
+    });
+
+    nextPageButton.addEventListener('click', () => {
+        currentPage++;
+        const maxPages = Math.ceil(filteredPokemon.length / pokemonPerPage);
+        if (currentPage > maxPages) currentPage = maxPages;
+        displayPokemon(filteredPokemon);
+    });
+});
