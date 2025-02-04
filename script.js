@@ -6,13 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevPageButton = document.getElementById('prev-page');
     const nextPageButton = document.getElementById('next-page');
 
-    let allPokemonData = []; // Store all fetched Pokemon data
-    let filteredPokemon = []; // Store filtered Pokemon data
+    let allPokemonData = [];
+    let filteredPokemon = [];
     let currentPage = 1;
-    const pokemonPerPage = 10; // Adjust as needed
+    const pokemonPerPage = 10;
 
-    // Fetch Pokemon types and populate the filter dropdown
-    fetch('https://pokeapi.co/api/v2/type') // Replace with your API endpoint
+    fetch('https://pokeapi.co/api/v2/type')
         .then(response => response.json())
         .then(data => {
             data.results.forEach(type => {
@@ -23,28 +22,38 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-    // Function to fetch and display Pokemon data
     async function fetchPokemonData(url) {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error fetching Pokemon data:", error);
+            pokemonGallery.innerHTML = "<p>Error loading Pokemon data. Please try again later.</p>";
+            return [];
+        }
     }
 
     async function displayPokemon(pokemonData) {
-        pokemonGallery.innerHTML = ''; // Clear previous cards
-        pokemonData.forEach(async pokemon => {
+        pokemonGallery.innerHTML = '';
+        for (const pokemon of pokemonData) {  // Use a loop to fetch details sequentially
             const pokemonDetails = await fetchPokemonData(pokemon.url);
+            if (pokemonDetails.length === 0) return; // Handle fetch error
             const card = createPokemonCard(pokemonDetails);
             pokemonGallery.appendChild(card);
-        });
+        }
     }
+
 
     function createPokemonCard(pokemon) {
         const card = document.createElement('div');
         card.classList.add('pokemon-card');
 
         const image = document.createElement('img');
-        image.src = pokemon.sprites.front_default; // Or other sprite as needed
+        image.src = pokemon.sprites.front_default;
         image.alt = pokemon.name;
         card.appendChild(image);
 
@@ -52,12 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
         name.textContent = pokemon.name;
         card.appendChild(name);
 
-        const type = document.createElement('span');
-        type.classList.add('type-badge', `${pokemon.types[0].type.name}-type`); // Add type-specific class
-        type.textContent = pokemon.types[0].type.name; // Display the first type
-        card.appendChild(type);
+        if (pokemon.types && pokemon.types.length > 0) { // Ensure types exist
+            const type = document.createElement('span');
+            type.classList.add('type-badge', `${pokemon.types[0].type.name}-type`);
+            type.textContent = pokemon.types[0].type.name;
+            card.appendChild(type);
+        }
 
-        // Add other details (number, weight, height) as needed
         const number = document.createElement('p');
         number.textContent = ` #${pokemon.id}`;
         card.appendChild(number);
@@ -71,19 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     }
 
-    // Initial Pokemon fetch and display (you'll need to adapt this to your API)
-    fetchPokemonData('https://pokeapi.co/api/v2/pokemon?limit=1000') // Fetch a reasonable number of Pokemon
+    fetchPokemonData('https://pokeapi.co/api/v2/pokemon?limit=1000')  // Fetch a reasonable number
         .then(data => {
+            if (data.length === 0) return; // Handle API fetch error
             allPokemonData = data.results;
             filteredPokemon = allPokemonData;
             displayPokemon(filteredPokemon.slice(0, pokemonPerPage));
         });
 
-    // Event listeners for filtering and search (to be implemented)
-    typeFilter.addEventListener('change', () => { /* Filter by type */ });
-    searchButton.addEventListener('click', () => { /* Search by name */ });
-
-    // Pagination logic (to be implemented)
-    prevPageButton.addEventListener('click', () => { /* Go to previous page */ });
-    nextPageButton.addEventListener('click', () => { /* Go to next page */ });
-});
+    typeFilter.addEventListener('change', () => {
+        const selectedType = typeFilter.value;
+        filteredPokemon = allPokemonData.filter(pokemon => {
+            if (!selectedType) return true
