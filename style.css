@@ -30,6 +30,18 @@ main {
     margin-bottom: 20px;
 }
 
+/* Style the form elements */
+.filter-controls select,
+.filter-controls input,
+.filter-controls button {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #444; /* Darker background for form elements */
+    color: white;
+}
+
 #pokemon-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -37,7 +49,7 @@ main {
 }
 
 .pokemon-card {
-    background-color: #333; /* Fallback color */
+    background-color: #333;
     padding: 15px;
     border-radius: 8px;
     text-align: center;
@@ -72,7 +84,7 @@ main {
 .grass-type { --type-color: #44AA44; }
 .bug-type { --type-color: #AABB22; }
 .poison-type { --type-color: #AA5588; }
-.electric-type { --type-color: #FFFF00; }
+.electric-type { --type-color: #FFFF00; color: black; }
 .ground-type { --type-color: #D2B48C; }
 .rock-type { --type-color: #B8860B; }
 .fighting-type { --type-color: #C03028; }
