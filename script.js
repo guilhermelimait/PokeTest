@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let allPokemonData = [];
     let filteredPokemon = [];
     let currentPage = 1;
-    const pokemonPerPage = 9; // Updated to 9 for 3x3 grid
+    const pokemonPerPage = 9;
 
     // Fetch Pokemon types for the filter
     fetch('https://pokeapi.co/api/v2/type')
@@ -49,19 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const startIndex = (currentPage - 1) * pokemonPerPage;
-        const endIndex = Math.min(startIndex + pokemonPerPage, pokemonData.length); // Corrected end index
+        const endIndex = Math.min(startIndex + pokemonPerPage, pokemonData.length);
 
         for (let i = startIndex; i < endIndex; i++) {
             const pokemon = pokemonData[i];
-            const pokemonDetails = await fetchPokemonData(pokemon.url || `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`); // Corrected URL
-            if (pokemonDetails.length === 0) continue; // Skip if details fetch fails
+            const details = await fetchPokemonData(pokemon.url || `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
+            if (details.length === 0) continue;
 
-            const card = createPokemonCard(pokemonDetails[0] || pokemonDetails); // Access the first element if it's an array
+            const card = createPokemonCard(details[0] || details);
             pokemonGallery.appendChild(card);
         }
     }
 
-    // Create Pokemon card (No changes needed)
     function createPokemonCard(pokemon) {
         const card = document.createElement('div');
         card.classList.add('pokemon-card');
@@ -75,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         name.textContent = pokemon.name;
         card.appendChild(name);
 
-        if (pokemon.types && pokemon.types.length > 0) { // Ensure types exist
+        if (pokemon.types && pokemon.types.length > 0) {
             const type = document.createElement('span');
             type.classList.add('type-badge', `${pokemon.types[0].type.name}-type`);
             type.textContent = pokemon.types[0].type.name;
@@ -100,8 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data.length === 0) return;
             allPokemonData = data;
-            filteredPokemon = allPokemonData;
-            displayPokemon(filteredPokemon); // Display all initially
+
+            // *** KEY FIX: Filter and display AFTER allPokemonData is set ***
+            filteredPokemon = allPokemonData; // Initialize filteredPokemon
+            displayPokemon(filteredPokemon);   // Display initial Pokemon
+
         });
 
     // Filter by type (Corrected)
