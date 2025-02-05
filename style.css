@@ -1,125 +1,177 @@
+/* style.css */
 body {
-    background-color: black;
-    color: white;
     font-family: sans-serif;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    background-color: #f4f4f4; /* Light background */
+    color: #333; /* Dark text color for contrast */
 }
 
 header {
-    display: flex;
-    justify-content: center;
+    text-align: center;
     padding: 20px 0;
+    background-color: #fff; /* White header background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 header img {
-    max-width: 300px;
+    max-width: 200px;
 }
 
-main {
-    padding: 20px;
-    flex: 1;
-}
-
-.filter-controls {
+.search-filter-bar {
+    background-color: #eee;
+    padding: 10px;
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Space below the bar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Style the form elements */
-.filter-controls select,
-.filter-controls input,
-.filter-controls button {
+.search-filter-bar input[type="text"],
+.search-filter-bar select {
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 16px;
-    background-color: #444; /* Darker background for form elements */
-    color: white;
 }
 
 #pokemon-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust minmax for card size */
+    gap: 20px; /* Increased gap */
+    padding: 20px;
 }
 
 .pokemon-card {
-    background-color: #333;
-    padding: 15px;
     border-radius: 8px;
-    text-align: center;
-    transition: transform 0.2s, background-image 0.3s ease;
-    position: relative;
     overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Card shadow */
+    transition: transform 0.2s; /* Smooth hover effect */
+    background-size: cover; /* Make sure gradient covers the card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px; /* Add some padding inside cards */
 }
 
 .pokemon-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px); /* Move up slightly on hover */
 }
 
 .pokemon-card img {
-    max-width: 100%;
-    height: auto;
+    width: 120px; /* Adjust image size */
+    height: 120px;
     margin-bottom: 10px;
-    position: relative;
-    z-index: 1;
 }
 
-.type-badge {
-    padding: 5px 10px;
+.pokemon-card h2 {
+    font-size: 1.4em; /* Slightly larger name */
+    margin: 5px 0;
+    color: #fff; /* White name text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add shadow to name */
+}
+
+.type-box {
+    padding: 5px 10px; /* More padding for type box */
     border-radius: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    font-size: 0.9em;
+    margin-top: 10px;
+    color: white;
+    text-transform: uppercase; /* Make type uppercase */
 }
 
-/* Type colors (using CSS variables) */
-.fire-type { --type-color: #FF4422; }
-.water-type { --type-color: #2288FF; }
-.grass-type { --type-color: #44AA44; }
-.bug-type { --type-color: #AABB22; }
-.poison-type { --type-color: #AA5588; }
-.electric-type { --type-color: #FFFF00; color: black; }
-.ground-type { --type-color: #D2B48C; }
-.rock-type { --type-color: #B8860B; }
-.fighting-type { --type-color: #C03028; }
-.psychic-type { --type-color: #F85888; }
-.ghost-type { --type-color: #705898; }
-.dark-type { --type-color: #707070; }
-.steel-type { --type-color: #B7B7CE; }
-.flying-type { --type-color: #88BBFF; }
-.fairy-type { --type-color: #EE99AC; }
-.ice-type { --type-color: #96D9FF; }
-.dragon-type { --type-color: #843CFF; }
-.normal-type { --type-color: #AAAA99; }
-
-.pokemon-card::before {
-    content: "";
-    position: absolute;
+.popup {
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to bottom, var(--type-color), #333);
-    z-index: 0;
-    opacity: 0.8;
-    pointer-events: none;
-}
-
-.pagination {
-    display: flex;
+    background-color: rgba(0, 0, 0, 0.7); /* Darker backdrop */
+    z-index: 1000;
     justify-content: center;
-    margin-top: 20px;
-    gap: 10px;
+    align-items: center;
 }
 
-footer {
-    background-color: #333;
-    text-align: center;
-    padding: 10px 0;
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 600px; /* Limit popup width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px; /* Larger close button */
+    cursor: pointer;
+    color: #888; /* Gray close button */
+    transition: color 0.2s;
+}
+
+.close-button:hover {
+    color: #333; /* Darker on hover */
+}
+
+.popup-content img {
+    max-width: 200px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px; /* Add margin below image */
+}
+
+.popup-content h2 {
+    margin-top: 0;
+}
+
+.popup-content p {
+    margin-bottom: 10px;
+    line-height: 1.6; /* Improve readability */
+}
+
+/* Type-specific background colors */
+.type-fire { background-color: #ff6b6b; } /* Lighter red */
+.type-water { background-color: #63b5f6; } /* Lighter blue */
+.type-grass { background-color: #4caf50; }
+.type-poison { background-color: #9c27b0; }
+.type-electric { background-color: #ffeb3b; }
+.type-ground { background-color: #795548; }
+.type-rock { background-color: #a1887f; }
+.type-bug { background-color: #8bc34a; }
+.type-ghost { background-color: #673ab7; }
+.type-steel { background-color: #bdbdbd; }
+.type-psychic { background-color: #e91e63; }
+.type-ice { background-color: #00bcd4; }
+.type-dragon { background-color: #9575cd; }
+.type-dark { background-color: #424242; }
+.type-fairy { background-color: #f06292; }
+.type-fighting { background-color: #ff5722; }
+.type-flying { background-color: #90caf9; }
+.type-normal { background-color: #a0a0a0; }
+
+/* Responsive adjustments (example) */
+@media (max-width: 768px) {
+    #pokemon-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller cards on smaller screens */
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .popup-content {
+        max-width: 90%; /* Make popup wider on smaller screens */
+    }
+
+    .popup-content img {
+        float: none; /* Image above text on smaller screens */
+        margin-right: 0;
+        margin-bottom: 10px;
+        max-width: 150px;
+        display: block;
+        margin: 0 auto 10px;
+    }
 }
