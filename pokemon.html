@@ -1,37 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Hub</title>
+    <title>Pokémon Database</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <header>
-        <img src="pokemon_logo.png" alt="Pokemon Logo">
+        <img src="pokemon_logo.png" alt="Pokémon Logo">
     </header>
-
-    <main>
-        <div class="filter-controls">
-            <select id="type-filter">
-                <option value="">All Types</option>
+    <div class="search-filter-bar">
+        <input type="text" id="search-box" placeholder="Search Pokémon...">
+        <select id="type-filter">
+            <option value="all">All</option>
             </select>
-            <input type="text" id="search-box" placeholder="Search by pokemon name...">
-            <button id="search-button">Search</button>
+    </div>
+    <div id="pokemon-gallery"></div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-button">&times;</span>
+            <div id="popup-content"></div>
         </div>
-
-        <div id="pokemon-gallery">
-        </div>
-
-        <div class="pagination">
-            <button id="prev-page">Previous</button>
-            <button id="next-page">Next</button>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2023 Pokemon Hub</p>
-    </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
