@@ -1,65 +1,129 @@
-# PokéDex - Generation I
+# Pokémon Database Explorer
 
-This project is a web-based PokéDex application that displays information about the first 151 Pokémon from Generation I.  It allows users to browse Pokémon, view their details, and (eventually) filter and search for specific Pokémon.
+A dynamic web application that allows users to explore the Pokémon universe using the PokéAPI. This interactive tool provides detailed information about Pokémon, including their stats, abilities, evolutions, and more.
 
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [How to Use](#how-to-use)
-- [Future Enhancements](#future-enhancements)
-- [Contributing](#contributing)
-
-## Introduction
-
-This PokéDex project is a personal learning exercise to practice front-end web development skills, particularly working with APIs and dynamic content. It utilizes the PokeAPI to fetch and display Pokémon data.
+![Pokémon Database Explorer Screenshot](screenshot.png)
 
 ## Features
 
-- Displays a list of Pokémon from Generation I (151 Pokémon).
-- Shows each Pokémon's sprite, name, ID, and types.
-- Provides a "Mais detalhes" (More Details) button (currently a placeholder).
-- Implemented pagination to handle the large number of Pokémon.
-- Basic styling to resemble the provided design.
+### 1. Filtering System
+- **Generation Filter**: Browse Pokémon by their generation (Gen 1 to Gen 9)
+- **Type Filter**: Filter Pokémon by their type (Fire, Water, Grass, etc.)
+- **Number Range**: Search for Pokémon within specific Pokédex number ranges
+- **Multiple Filters**: Combine different filters for precise results
 
-## Technologies Used
+### 2. Sorting Options
+- Sort by Pokédex Number
+- Sort Alphabetically by Name
+- Sort by Pokémon Type
 
-- HTML5: For structuring the web page.
-- CSS3: For styling the application.
-- JavaScript: For fetching data from the PokeAPI, dynamic updates, and implementing interactivity.
-- PokeAPI:  A RESTful API providing Pokémon data.
+### 3. Detailed Pokémon Information
+Each Pokémon card displays:
+- Official Artwork
+- Pokédex Number
+- Name
+- Type(s)
 
-## Installation
+### 4. Interactive Popup Details
+Clicking on a Pokémon reveals:
+- High-resolution Official Artwork
+- Pokédex Entry/Description
+- Base Stats with Visual Bars
+- Type Advantages/Disadvantages
+- Evolution Chain with Requirements
+- Abilities with Detailed Descriptions
 
-1.  Clone the repository:
-    ```bash
-    git clone [https://github.com/guilhermelimait/PokeTest.git](https://www.google.com/search?q=https://github.com/guilhermelimait/PokeTest.git)
-    ```
-2.  Navigate to the project directory:
-    ```bash
-    cd PokeTest
-    ```
-3.  Open the `pokemon.html` file in your web browser.
+### 5. User Interface Features
+- Responsive Design: Works on desktop and mobile devices
+- Loading Animations: Visual feedback during data fetching
+- Dynamic Updates: Real-time filter application
+- Smooth Transitions: Enhanced user experience
 
-## How to Use
+## Technical Details
 
-1.  Open the `pokemon.html` file in your browser.
-2.  Browse the list of Pokémon.
-3.  Click the "Anterior" (Previous) and "Próxima" (Next) buttons to navigate between pages.
-4.  The "Mais detalhes" button is a placeholder for future functionality.
-5.  The type filter and search bar are currently under development.
+### Technologies Used
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- PokéAPI (https://pokeapi.co/)
 
-## Future Enhancements
+### API Integration
+The application uses the following PokéAPI endpoints:
+- `/pokemon`: Basic Pokémon data
+- `/pokemon-species`: Species information and Pokédex entries
+- `/evolution-chain`: Evolution data
+- `/ability`: Detailed ability descriptions
 
-- Implement the "Mais detalhes" functionality to display more information about a selected Pokémon (stats, abilities, etc.).
-- Add filtering by type.
-- Implement search by Pokémon name.
-- Improve the user interface and overall styling.
-- Add more robust error handling.
-- Implement a loading indicator while fetching data.
+## Setup and Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/pokemon-database.git
+```
+
+2. Navigate to the project directory:
+```bash
+cd pokemon-database
+```
+
+3. Open `index.html` in your web browser or use a local server:
+```bash
+python -m http.server 8000
+```
+
+
+## Usage Guide
+
+1. **Basic Navigation**
+   - Scroll through the gallery to browse Pokémon
+   - Click on any Pokémon card to view detailed information
+
+2. **Using Filters**
+   - Select a generation from the dropdown to view Pokémon from specific regions
+   - Choose a type to filter Pokémon by their elemental type
+   - Enter number ranges to find specific Pokémon by their Pokédex numbers
+
+3. **Sorting**
+   - Use the sort dropdown to organize Pokémon by number, name, or type
+   - Sorting is applied while maintaining current filters
+
+4. **Viewing Details**
+   - Click any Pokémon to open the detailed view
+   - Scroll through the popup to see all information
+   - Click the close button or outside the popup to return to the gallery
+
+## Performance Considerations
+
+- The application implements debouncing for search inputs
+- Images are lazy-loaded to improve initial load time
+- API requests are optimized to minimize data usage
+
+## Browser Support
+
+Tested and compatible with:
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ## Contributing
 
-Contributions are welcome! If you have any suggestions or bug fixes, please open an issue or submit a pull request.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+- Data provided by [PokéAPI](https://pokeapi.co/)
+- Pokémon and all related properties are trademarks of Nintendo
+
+## Contact
+
+GuilhermeLimaIT - [@yourtwitter](https://twitter.com/guilhermelima)
+Project Link: [https://github.com/guilhermelimait/pokemon-database](https://github.com/guilhermelimait/pokemon-database)
