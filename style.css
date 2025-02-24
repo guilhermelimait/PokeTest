@@ -539,3 +539,19 @@ footer a:hover {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+@font-face {
+    font-family: 'Pokemon Solid';
+    src: url('Pokemon Solid.ttf') format('truetype');
+}
+
+.pokemon-title {
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: 3em;
+    color: #ffcb05;  /* Pokemon yellow */
+    -webkit-text-stroke: 2px #2a75bb;  /* Pokemon blue */
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 20px 0;
+    text-shadow: 3px 3px 0 #3c5aa6;  /* Darker Pokemon blue */
+}
