@@ -2,7 +2,7 @@
 
 A dynamic web application that allows users to explore the Pokémon universe using the PokéAPI. This interactive tool provides detailed information about Pokémon, including their stats, abilities, evolutions, and more.
 
-![Pokémon Database Explorer Screenshot](screenshot.png)
+![Pokémon Database Explorer Main View](poke.jpg)
 
 ## Features
 
@@ -11,6 +11,7 @@ A dynamic web application that allows users to explore the Pokémon universe usi
 - **Type Filter**: Filter Pokémon by their type (Fire, Water, Grass, etc.)
 - **Number Range**: Search for Pokémon within specific Pokédex number ranges
 - **Multiple Filters**: Combine different filters for precise results
+- **Reset Button**: Clear all filters and return to default view
 
 ### 2. Sorting Options
 - Sort by Pokédex Number
@@ -25,7 +26,11 @@ Each Pokémon card displays:
 - Type(s)
 
 ### 4. Interactive Popup Details
-Clicking on a Pokémon reveals:
+Clicking on a Pokémon reveals detailed information in an interactive popup:
+
+![Pokémon Information Popup](pokeinfo.jpg)
+
+Features include:
 - High-resolution Official Artwork
 - Pokédex Entry/Description
 - Base Stats with Visual Bars
@@ -82,6 +87,7 @@ python -m http.server 8000
    - Select a generation from the dropdown to view Pokémon from specific regions
    - Choose a type to filter Pokémon by their elemental type
    - Enter number ranges to find specific Pokémon by their Pokédex numbers
+   - Use the reset button to clear all filters
 
 3. **Sorting**
    - Use the sort dropdown to organize Pokémon by number, name, or type
@@ -125,5 +131,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Contact
 
-GuilhermeLimaIT - [@yourtwitter](https://twitter.com/guilhermelima)
-Project Link: [https://github.com/guilhermelimait/pokemon-database](https://github.com/guilhermelimait/pokemon-database)
+Project Link: [https://github.com/guilhermelimait/pokemon-database-explorer](https://github.com/guilhermelimait/pokemon-database-explorer)
